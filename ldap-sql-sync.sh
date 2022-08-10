@@ -13,12 +13,12 @@ usercounter=1
 while [[ $usercounter -le $usercount ]]
 do
 
-        #Create the User if not exists
-        user=${username[$usercounter]}
-        mariadb -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS -P $MYSQL_PORT -e "CREATE USER IF NOT EXISTS '$user'@'%' IDENTIFIED VIA pam USING 'mariadb'"
+    #Create the User if not exists
+    user=${username[$usercounter]}
+    mariadb -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS -P $MYSQL_PORT -e "CREATE USER IF NOT EXISTS '$user'@'%' IDENTIFIED VIA pam USING 'mariadb'"
 
-        db=${user}_%
-        mysql -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS -P $MYSQL_PORT -e "GRANT ALL PRIVILEGES ON \`$db\` . * TO '$user'@'%'; FLUSH PRIVILEGES;"
-	((usercounter++))
+    db=${user}_%
+    mariadb -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS -P $MYSQL_PORT -e "GRANT ALL PRIVILEGES ON \`$db\` . * TO '$user'@'%'; FLUSH PRIVILEGES;"
+    ((usercounter++))
 
 done
