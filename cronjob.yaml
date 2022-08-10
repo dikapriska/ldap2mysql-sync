@@ -3,14 +3,14 @@ kind: CronJob
 metadata:
   name: ldap-syncher-test
 spec:
-  schedule: "* * * * *"
+  schedule: "0 */3 * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: ldap-syncher
-            image: dikapriska/ldap-sql-syncher:0.1
+            image: dikapriska/ldap2mysql-sync:0.1
             imagePullPolicy: IfNotPresent
             env:
             - name: MYSQL_USER
