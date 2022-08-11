@@ -2,13 +2,13 @@ FROM ubuntu:20.04
 LABEL maintainer="Dika Priska"
 LABEL version="0.1"
 
+COPY syncher.sh .
+
 RUN apt update 
 RUN apt install ldap-utils mysql-client -y 
 RUN rm -rf /var/lib/apt
 
-COPY ldap-sql-sync.sh .
-
-RUN chmod a+x ldap-sql-sync.sh
+RUN chmod a+x syncher.sh
 
 ENV MYSQL_USER="test"
 ENV MYSQL_PASS="test"
@@ -20,4 +20,4 @@ ENV LDAP_PASS="test"
 ENV LDAP_PORT="test"
 ENV LDAP_BASE="test"
 
-ENTRYPOINT ["bash","ldap-sql-sync.sh"]
+ENTRYPOINT ["bash","syncher.sh"]
